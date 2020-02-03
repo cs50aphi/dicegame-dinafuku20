@@ -20,6 +20,7 @@ public class DieDriver
         System.out.println("How many sides would you like on your dice?");
         int sides = in.nextInt();
         System.out.println();
+        // have user pick a number of sides between 0 and 101
         while (sides <= 0 || sides > 100)
         {
             System.out.println("Please pick a number between 0 and 101.");
@@ -37,9 +38,12 @@ public class DieDriver
             pause();
             // roll for p1
             int tempRoll = p1.roll();
+            // counting number of times dice is rolled
             rolls1++;
+            // if p1Twice is true, player can roll twice
             if (p1Twice)
             {
+                // if the player rolls a number that adds up to the goal
                 if (location1 + tempRoll == goal)
                 {
                     System.out.println("Player 1 rolled a " + tempRoll);
@@ -51,20 +55,24 @@ public class DieDriver
                 }
                 else
                 {
+                    // have the player roll a second time
                     tempRollAgain = p1.roll();
                     System.out.println("Player 1 rolled a " + tempRoll + " and a " + tempRollAgain);
                     System.out.println();
                     location1 += tempRoll;
                     location1 += tempRollAgain;
                     rolls1++;
+                    // if the player reaches the goal
                     if (location1 + tempRoll + tempRollAgain == goal)
                     {
+                        // win
                         System.out.println("Player 1 rolled a " + tempRoll);
                         System.out.println("Player 1 wins with " + rolls1 + " rolls!");
                         p1Win = true;
                         gameOver = true;
                     }
                 }
+                // set twice to false, so player doesn't roll twice every round
                 p1Twice = false;
             }
             else
@@ -82,6 +90,7 @@ public class DieDriver
                 // if not game over
                 if (location1 + tempRoll < goal)
                 {
+                    // if 8 or 24 is rolled
                     if (tempRoll == 8 || tempRoll == 24)
                     {
                         System.out.println("Player 1 rolled a " + tempRoll);
@@ -89,8 +98,10 @@ public class DieDriver
                         System.out.println();
                         // if p1 has won, set gameOver to true;
                         location1 += tempRoll;
+                        // player rolls twice next turn
                         p1Twice = true;
                     }
+                    // just roll
                     else
                     {
                         System.out.println("Player 1 rolls a " + tempRoll);
@@ -98,6 +109,7 @@ public class DieDriver
                         location1 += tempRoll;
                     }
                 }
+                // player exceeds goal so don't add
                 else
                 {
                     System.out.println("Player 1 rolled a " + tempRoll + " and exceeds the goal, so it doesn't count!");
@@ -109,9 +121,12 @@ public class DieDriver
             pause();
             // roll for p2
             int tempRollTwo = p2.roll();
+            // count rolls for p2
             rolls2++;
+            // if players rolls twice this round
             if (p2Twice)
             {
+                // if player reaches the goal
                 if (location2 + tempRollTwo == goal)
                 {
                     System.out.println("Player 2 rolled a " + tempRollTwo);
@@ -123,12 +138,14 @@ public class DieDriver
                 }
                 else
                 {
+                    // roll again
                     tempRollAgain = p2.roll();
                     System.out.println("Player 2 rolled a " + tempRollTwo + " and a " + tempRollAgain);
                     System.out.println();
                     location2 += tempRollTwo;
                     location2 += tempRollAgain;
                     rolls2++;
+                    // if player reaches the goal
                     if (location2 + tempRollTwo + tempRollAgain == goal)
                     {
                         System.out.println("Player 2 rolled a " + tempRollTwo);
@@ -137,6 +154,7 @@ public class DieDriver
                         gameOver = true;
                     }
                 }
+                // player doesn't roll twice each round after so set p2Twice to false
                 p2Twice = false;
             }
             else
@@ -151,8 +169,10 @@ public class DieDriver
                     p2Win = true;
                     gameOver = true;
                 }
+                // if the player doesn't reach the goal yet
                 if (location2 + tempRollTwo < goal)
                 {
+                    // if player rolls an 8 or 24
                     if (tempRollTwo == 8 || tempRollTwo == 24)
                     {
                         System.out.println("Player 2 rolled a " + tempRollTwo);
@@ -160,8 +180,10 @@ public class DieDriver
                         System.out.println();
                         // if p1 has won, set gameOver to true;
                         location2 += tempRollTwo;
+                        // p2 rolls twice next round
                         p2Twice = true;
                     }
+                    // just roll and add to location
                     else
                     {
                         System.out.println("Player 2 rolls a " + tempRollTwo);
@@ -169,6 +191,7 @@ public class DieDriver
                         location2 += tempRollTwo;
                     }
                 }
+                // if player exceeds, don't add
                 else
                 {
                     System.out.println("Player 2 rolled a " + tempRollTwo + " and exceeds the goal, so it doesn't count!");
